@@ -25,13 +25,11 @@ use LogicException;
 use Mezzio\Application;
 use Mezzio\ConfigProvider as MezzioConfigProvider;
 use Mezzio\Handler\NotFoundHandler;
-use Mezzio\MiddlewareFactory;
 use Mezzio\Router\ConfigProvider as MezzioRouterConfigProvider;
 use Mezzio\Router\FastRouteRouter\ConfigProvider as MezzioRouterFastRouteRouterConfigProvider;
 use Mezzio\Router\Middleware\DispatchMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
-use Psr\Container\ContainerInterface;
 use TomasChochola\Template\Mezzio\Handler\PingRequestHandler;
 
 use function assert;
@@ -54,10 +52,9 @@ final readonly class Bootstrapper
         $config = self::cached();
         $container = new ServiceManager($config);
         $app = $container->get(Application::class);
-        $factory = $container->get(MiddlewareFactory::class);
 
-        self::pipeline($app, $factory, $container);
-        self::routes($app, $factory, $container);
+        self::pipeline($app);
+        self::routes($app);
 
         return new Kernel($app, $container);
     }
@@ -120,7 +117,7 @@ final readonly class Bootstrapper
         return $dependencies;
     }
 
-    private static function pipeline(Application $app, MiddlewareFactory $factory, ContainerInterface $container): void
+    private static function pipeline(Application $app): void
     {
         $app->pipe(ErrorHandler::class);
         $app->pipe(RouteMiddleware::class);
@@ -129,7 +126,7 @@ final readonly class Bootstrapper
         $app->pipe(NotFoundHandler::class);
     }
 
-    private static function routes(Application $app, MiddlewareFactory $factory, ContainerInterface $container): void
+    private static function routes(Application $app): void
     {
         $app->route(PingRequestHandler::PATH, [PingRequestHandler::class], [PingRequestHandler::METHOD]);
     }
