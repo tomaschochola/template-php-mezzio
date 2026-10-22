@@ -31,10 +31,7 @@
         "TomasChochola",
         "Tomas Chochola",
         "Tomáš Chochola",
-        "application",
-        "mezzio",
-        "middleware",
-        "template"
+        "template-php-mezzio"
     ],
     "license": "CC-BY-ND-4.0",
     "name": "@tomaschochola/template-php-mezzio",
