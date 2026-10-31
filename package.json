@@ -15,7 +15,7 @@
             "url": "https://github.com/tomaschochola"
         }
     ],
-    "description": "Mezzio application template with APCu configuration caching, MySQL migrations, and a health endpoint.",
+    "description": "github.com/tomaschochola/template-php-mezzio",
     "devDependencies": {
         "@tomaschochola/tooling-eslint": "git+https://github.com/tomaschochola/tooling-eslint.git#main",
         "@tomaschochola/tooling-prettier": "git+https://github.com/tomaschochola/tooling-prettier.git#main",
