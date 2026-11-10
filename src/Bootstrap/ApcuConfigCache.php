@@ -31,7 +31,7 @@ final readonly class ApcuConfigCache
         $ok = false;
         $resolved = apcu_fetch(self::key(), $ok);
 
-        if ($ok && is_array($resolved)) {
+        if ($ok === true && is_array($resolved)) {
             return $resolved;
         }
 
